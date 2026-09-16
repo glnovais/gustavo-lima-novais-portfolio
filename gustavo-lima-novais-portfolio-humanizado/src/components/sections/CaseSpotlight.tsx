@@ -10,7 +10,7 @@ const code = `Get-ADComputer -Filter * |
 Test-Connection -ComputerName "SERVER-01" -Count 1`;
 
 export default function CaseSpotlight() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
 
   const automationItems = [
     t('case.automation.item1'),
@@ -26,6 +26,18 @@ export default function CaseSpotlight() {
     t('case.ad.outcome4'),
   ];
 
+  const adCopy = locale === 'en-US'
+    ? 'Project focused on OU reorganization, legacy account treatment, policy review and more flexible administration through security groups.'
+    : locale === 'es-ES'
+      ? 'Proyecto enfocado en reorganización de OUs, tratamiento de cuentas antiguas, revisión de políticas y una administración más flexible mediante grupos de seguridad.'
+      : 'Projeto focado em reorganização de OUs, tratamento de contas antigas, revisão de políticas e uma administração mais flexível por grupos de segurança.';
+
+  const monitorCopy = locale === 'en-US'
+    ? 'Zabbix and SNMP applied to monitoring servers, services, network devices and printers, with operational dashboards and alerts.'
+    : locale === 'es-ES'
+      ? 'Zabbix y SNMP aplicados al monitoreo de servidores, servicios, dispositivos de red e impresoras, con dashboards operativos y alertas.'
+      : 'Zabbix e SNMP aplicados ao acompanhamento de servidores, serviços, dispositivos de rede e impressoras, com dashboards operacionais e alertas.';
+
   return <>
     <section id="projetos" className="section featured-case-section">
       <div className="container-shell">
@@ -34,7 +46,7 @@ export default function CaseSpotlight() {
             <div className="featured-case-index mono">{t('projects.label')} / 01</div>
             <div className="section-kicker">{t('case.ad.kicker')}</div>
             <h2 className="section-title">{t('case.ad.title')}</h2>
-            <p className="section-copy mt-5">{t('case.ad.copy')}</p>
+            <p className="section-copy mt-5">{adCopy}</p>
 
             <div className="featured-case-tags" aria-label="Active Directory">
               <span>OU Design</span>
@@ -60,9 +72,7 @@ export default function CaseSpotlight() {
             <div className="featured-case-visual-head">
               <div>
                 <span className="mono">{t('case.ad.architectureLabel')}</span>
-                <small>{t('project.demoArchitecture')}</small>
               </div>
-              <span className="badge">{t('projects.anonymized')}</span>
             </div>
             <ADArchitecture />
           </div>
@@ -103,7 +113,7 @@ export default function CaseSpotlight() {
         <div className="grid xl:grid-cols-[.8fr_1.2fr] gap-7 items-center">
           <div>
             <h2 className="section-title">{t('case.monitor.title')}</h2>
-            <p className="section-copy mt-5">{t('case.monitor.copy')}</p>
+            <p className="section-copy mt-5">{monitorCopy}</p>
             <Link to="/projects/monitoring" className="btn btn-ghost mt-7">{t('case.monitor.open')}</Link>
           </div>
           <MonitoringDashboard />
