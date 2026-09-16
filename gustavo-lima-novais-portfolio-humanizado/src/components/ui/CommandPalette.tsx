@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ChangeEvent, type KeyboardEvent, type MouseEvent } from 'react';
+import { useEffect, useMemo, useState, type ChangeEvent, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent } from 'react';
 import { Command, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from '../../i18n/I18nProvider';
@@ -18,7 +18,7 @@ export default function CommandPalette({ open, onClose }: Props) {
   useEffect(() => { if (!open) setQuery(''); }, [open]);
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open, onClose]);
@@ -38,7 +38,7 @@ export default function CommandPalette({ open, onClose }: Props) {
       <div className="panel w-full max-w-xl overflow-hidden shadow-2xl">
         <div className="p-3 border-b border-white/5 flex items-center gap-3">
           <Search size={18} className="text-slate-500"/>
-          <input autoFocus value={query} onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)} onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => { if (e.key === 'Enter' && filtered[0]) go(filtered[0][1]); }} placeholder={t('palette.placeholder')} className="w-full bg-transparent outline-none text-sm py-2"/>
+          <input autoFocus value={query} onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)} onKeyDown={(e: ReactKeyboardEvent<HTMLInputElement>) => { if (e.key === 'Enter' && filtered[0]) go(filtered[0][1]); }} placeholder={t('palette.placeholder')} className="w-full bg-transparent outline-none text-sm py-2"/>
           <span className="badge mono">ESC</span>
         </div>
         <div className="p-2 max-h-[48vh] overflow-auto">
