@@ -18,7 +18,7 @@ export default function CommandPalette({ open, onClose }: Props) {
   useEffect(() => { if (!open) setQuery(''); }, [open]);
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open, onClose]);
