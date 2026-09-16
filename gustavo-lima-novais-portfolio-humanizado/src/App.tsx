@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
@@ -8,11 +8,21 @@ import NotFoundPage from './pages/NotFoundPage';
 import CommandPalette from './components/ui/CommandPalette';
 import ScrollProgress from './components/ui/ScrollProgress';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
+    const onKey = (event: globalThis.KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
         setPaletteOpen((value) => !value);
@@ -25,6 +35,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       <ScrollProgress />
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
       <Routes>
