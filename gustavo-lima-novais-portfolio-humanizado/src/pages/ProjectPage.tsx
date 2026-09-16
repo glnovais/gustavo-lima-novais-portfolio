@@ -115,25 +115,30 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
       create: 'Governed user provisioning with validated fields and authorized OU selection.',
       reset: 'Password reset flow with individual lookup, preview and confirmation before execution.',
       unlock: 'Account unlock workflow designed for a controlled, individual operation.',
+      diagnostic: 'Assisted diagnostics centralizing network, session, Windows and inventory checks for an endpoint.',
       audit: 'Audit trail and report area focused on traceability of queries and permitted actions.',
     } : locale === 'es-ES' ? {
       dashboard: 'Panel operativo con estado del entorno, búsqueda global e indicadores de operación.',
       create: 'Creación gobernada de usuarios con campos validados y selección de OU autorizada.',
       reset: 'Flujo de restablecimiento de contraseña con búsqueda individual, vista previa y confirmación.',
       unlock: 'Flujo de desbloqueo de cuenta diseñado para una operación individual y controlada.',
+      diagnostic: 'Diagnóstico asistido que centraliza comprobaciones de red, sesión, Windows e inventario del equipo.',
       audit: 'Trazabilidad de auditoría e informes centrados en el seguimiento de consultas y acciones permitidas.',
     } : {
       dashboard: 'Painel operacional com status do ambiente, busca global e indicadores da operação.',
       create: 'Criação governada de usuários com campos validados e seleção de OU autorizada.',
       reset: 'Fluxo de reset de senha com pesquisa individual, prévia e confirmação antes da execução.',
       unlock: 'Fluxo de desbloqueio de conta pensado para uma operação individual e controlada.',
+      diagnostic: 'Diagnóstico assistido reunindo verificações de rede, sessão, Windows e inventário de um endpoint.',
       audit: 'Trilha de auditoria e relatórios voltados à rastreabilidade de consultas e ações permitidas.',
     };
 
     const screenshots = [
+      ['/projects/admin-center/00-dashboard.webp', copy.dashboard],
       ['/projects/admin-center/01-criacao-usuario.webp', copy.create],
       ['/projects/admin-center/02-reset-senha.webp', copy.reset],
       ['/projects/admin-center/03-desbloqueio-usuario.webp', copy.unlock],
+      ['/projects/admin-center/04-diagnostico-assistido.webp', copy.diagnostic],
       ['/projects/admin-center/05-auditoria.webp', copy.audit],
     ] as const;
 
@@ -142,8 +147,7 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
         <div className="mono text-xs text-cyan-300">SDE ADMIN CENTER · v1.6.0</div>
         <div className="flex flex-wrap gap-2"><span className="badge">PowerShell 5.1</span><span className="badge">WPF / XAML</span><span className="badge">Active Directory</span></div>
       </div>
-      <ProjectScreenshot src="/projects/admin-center/00-dashboard.webp" alt={copy.dashboard} caption={copy.dashboard}/>
-      <div className="grid xl:grid-cols-2 gap-5">
+      <div className="space-y-5">
         {screenshots.map(([src, caption]) => <ProjectScreenshot key={src} src={src} alt={caption} caption={caption}/>)}
       </div>
     </div>;
