@@ -26,7 +26,7 @@ export default function ProjectScreenshot({ src, alt, caption }: Props) {
         <img src={src} alt={alt} loading="lazy" decoding="async"/>
         <span><Maximize2 size={15}/> Zoom</span>
       </button>
-      <figcaption>{caption}<small>{t('screenshots.note')}</small></figcaption>
+      <figcaption>{caption}</figcaption>
     </figure>
     {open && <div className="screenshot-modal" role="dialog" aria-modal="true" aria-label={caption} onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) setOpen(false); }}><button onClick={() => setOpen(false)} aria-label={t('a11y.closeMenu')}><X size={19}/></button><img src={src} alt={alt}/></div>}
   </>;

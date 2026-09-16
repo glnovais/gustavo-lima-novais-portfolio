@@ -6,7 +6,7 @@ export const profile = {
   complementaryLine: 'Infraestrutura Corporativa | Redes | Monitoramento | ITSM | Governança de TI',
   email: 'glnovais.ti@gmail.com',
   linkedin: 'https://www.linkedin.com/in/gustavo-lima-novais-560b23314/',
-  github: '',
+  github: 'https://github.com/glnovais',
   location: 'São Paulo, SP — Brasil',
   photo: '/images/gustavo-lima-novais.webp',
   photoFallback: '/images/gustavo-lima-novais.png',

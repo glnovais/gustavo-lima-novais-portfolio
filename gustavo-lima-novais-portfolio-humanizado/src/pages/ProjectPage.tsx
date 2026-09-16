@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ArrowLeft, CheckCircle2, Eye, FolderOpen, LockKeyhole, Route, ShieldCheck, Wrench } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, LockKeyhole, ShieldCheck, Wrench } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
@@ -129,24 +129,6 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
   return <NetworkTopology/>;
 }
 
-function ScreenshotArea() {
-  const { t } = useI18n();
-  return <div className="panel p-5 md:p-6">
-    <div className="flex items-start gap-4">
-      <div className="w-11 h-11 rounded-xl border border-cyan-300/15 grid place-items-center text-cyan-300 shrink-0"><Eye size={18}/></div>
-      <div>
-        <h2 className="font-semibold">{t('screenshots.title')}</h2>
-        <p className="text-sm text-slate-500 leading-6 mt-2">{t('screenshots.empty')}</p>
-        <p className="text-xs text-slate-600 mt-3">{t('screenshots.note')}</p>
-      </div>
-    </div>
-    <div className="screenshot-frame mt-5">
-      <div className="screenshot-toolbar"><i/><i/><i/><span>{t('screenshots.title')}</span></div>
-      <div className="screenshot-empty"><FolderOpen size={22}/><span>{t('project.screenshotPlaceholder')}</span></div>
-    </div>
-  </div>;
-}
-
 export default function ProjectPage({ onOpenPalette }: Props) {
   const { slug = '' } = useParams();
   const { locale, t } = useI18n();
@@ -166,8 +148,8 @@ export default function ProjectPage({ onOpenPalette }: Props) {
 
     <section className="section"><div className="container-shell"><div className="section-kicker">{t('project.approach')}</div><div className="grid md:grid-cols-2 gap-3 mt-4">{project.approach.map((x, i) => <div className="panel p-5 flex gap-4" key={pickText(x, locale)}><span className="mono text-xs text-cyan-300">0{i + 1}</span><p className="text-sm text-slate-300 leading-6 m-0">{pickText(x, locale)}</p></div>)}</div></div></section>
 
-    <section className="section"><div className="container-shell grid lg:grid-cols-3 gap-4"><div className="panel p-6"><Wrench size={20} className="text-cyan-300"/><h2 className="font-semibold mt-5">{t('project.technologies')}</h2><div className="flex flex-wrap gap-2 mt-4">{project.technologies.map(x => <span className="badge" key={x}>{x}</span>)}</div></div><div className="panel p-6"><CheckCircle2 size={20} className="text-emerald-400"/><h2 className="font-semibold mt-5">{t('project.results')}</h2><ul className="mt-4 space-y-3 text-sm text-slate-400">{project.results.map(x => <li key={pickText(x, locale)}>• {pickText(x, locale)}</li>)}</ul></div><div className="panel p-6"><Route size={20} className="text-yellow-400"/><h2 className="font-semibold mt-5">{t('project.next')}</h2><ul className="mt-4 space-y-3 text-sm text-slate-400">{project.nextSteps.map(x => <li key={pickText(x, locale)}>• {pickText(x, locale)}</li>)}</ul></div></div></section>
+    <section className="section"><div className="container-shell grid lg:grid-cols-2 gap-4"><div className="panel p-6"><Wrench size={20} className="text-cyan-300"/><h2 className="font-semibold mt-5">{t('project.technologies')}</h2><div className="flex flex-wrap gap-2 mt-4">{project.technologies.map(x => <span className="badge" key={x}>{x}</span>)}</div></div><div className="panel p-6"><CheckCircle2 size={20} className="text-emerald-400"/><h2 className="font-semibold mt-5">{t('project.results')}</h2><ul className="mt-4 space-y-3 text-sm text-slate-400">{project.results.map(x => <li key={pickText(x, locale)}>• {pickText(x, locale)}</li>)}</ul></div></div></section>
 
-    <section className="section"><div className="container-shell"><div className="panel p-6 md:p-8 border-cyan-300/10"><div className="flex items-start gap-4"><LockKeyhole className="text-cyan-300 shrink-0"/><div><div className="section-kicker mb-2">{t('project.security')}</div><h2 className="text-xl font-semibold">{t('project.securityTitle')}</h2><p className="text-sm text-slate-500 leading-6 mt-3">{t('project.securityCopy')}</p></div></div></div><div className="grid xl:grid-cols-[1.2fr_.8fr] gap-5 mt-5"><div className="panel p-6"><ShieldCheck size={20} className="text-cyan-300"/><h2 className="font-semibold mt-4">{t('project.lessons')}</h2><div className="grid md:grid-cols-3 gap-3 mt-4">{project.lessons.map(x => <div className="rounded-xl border border-white/5 p-4 text-sm text-slate-400" key={pickText(x, locale)}>{pickText(x, locale)}</div>)}</div></div><ScreenshotArea/></div></div></section>
+    <section className="section"><div className="container-shell"><div className="panel p-6 md:p-8 border-cyan-300/10"><div className="flex items-start gap-4"><LockKeyhole className="text-cyan-300 shrink-0"/><div><div className="section-kicker mb-2">{t('project.security')}</div><h2 className="text-xl font-semibold">{t('project.securityTitle')}</h2><p className="text-sm text-slate-500 leading-6 mt-3">{t('project.securityCopy')}</p></div></div></div><div className="panel p-6 mt-5"><ShieldCheck size={20} className="text-cyan-300"/><h2 className="font-semibold mt-4">{t('project.lessons')}</h2><div className="grid md:grid-cols-3 gap-3 mt-4">{project.lessons.map(x => <div className="rounded-xl border border-white/5 p-4 text-sm text-slate-400" key={pickText(x, locale)}>{pickText(x, locale)}</div>)}</div></div></div></section>
   </main><Footer/></>;
 }
