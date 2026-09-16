@@ -8,7 +8,7 @@ type Props = {
   caption: string;
 };
 
-const ASSET_VERSION = '20260916-2';
+const ASSET_VERSION = '20260916-3';
 
 export default function ProjectScreenshot({ src, alt, caption }: Props) {
   const { locale, t } = useI18n();
