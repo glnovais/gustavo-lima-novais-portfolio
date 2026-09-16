@@ -70,7 +70,12 @@ export default function Hero() {
             <a href="#projetos" className="btn btn-primary">{t('hero.primary')} <ArrowRight size={17} /></a>
             <a href="#experiencia" className="btn btn-ghost">{t('hero.secondary')}</a>
             {profile.resumeAvailable && (
-              <a className="hero-resume-link" href={profile.resume} download>
+              <a
+                className="hero-resume-link"
+                href={profile.resume}
+                download="Gustavo_Lima_Novais.pdf"
+                type="application/pdf"
+              >
                 <Download size={16} />{t('hero.resume')}
               </a>
             )}
