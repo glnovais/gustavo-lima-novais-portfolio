@@ -1,0 +1,15 @@
+export const profile = {
+  name: 'Gustavo Lima Novais',
+  shortName: 'Gustavo Novais',
+  role: 'Analista de Infraestrutura N2',
+  headline: 'Analista de Infraestrutura N2 | Active Directory | Windows Server | Automação',
+  complementaryLine: 'Infraestrutura Corporativa | Redes | Monitoramento | ITSM | Governança de TI',
+  email: 'glnovais.ti@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/gustavo-lima-novais-560b23314/',
+  github: '',
+  location: 'São Paulo, SP — Brasil',
+  photo: '/images/gustavo-lima-novais.webp',
+  photoFallback: '/images/gustavo-lima-novais.png',
+  resume: '/resume/gustavo-lima-novais.pdf',
+  resumeAvailable: true,
+} as const;

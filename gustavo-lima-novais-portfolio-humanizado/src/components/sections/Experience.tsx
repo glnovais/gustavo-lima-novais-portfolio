@@ -1,0 +1,9 @@
+import { BriefcaseBusiness, CheckCircle2 } from 'lucide-react';
+import { experience } from '../../data/experience';
+import { useI18n } from '../../i18n/I18nProvider';
+import { pickText } from '../../i18n/text';
+
+export default function Experience() {
+  const { locale, t } = useI18n();
+  return <section id="experiencia" className="section"><div className="container-shell"><div className="section-kicker">{t('experience.kicker')}</div><h2 className="section-title">{t('experience.title')}</h2><div className="mt-10 relative"><div className="absolute left-[18px] top-4 bottom-4 w-px bg-white/10 hidden md:block"/>{experience.map((item, i) => <article key={`${item.period}-${item.company}`} className={`md:pl-14 relative ${i ? 'mt-5' : ''}`}><div className="hidden md:grid absolute left-0 top-6 w-9 h-9 rounded-full bg-[#0b1220] border border-cyan-300/20 place-items-center text-cyan-300"><BriefcaseBusiness size={15}/></div><div className={`panel p-5 md:p-6 ${item.current ? 'experience-current' : ''}`}><div className="flex flex-col xl:flex-row xl:items-start justify-between gap-5"><div><div className="flex items-center gap-2"><div className="mono text-xs text-cyan-300">{item.period}</div>{item.current && <span className="badge"><i className="badge-dot status-pulse"/>{t('experience.current')}</span>}</div><h3 className="text-xl md:text-2xl font-semibold mt-3">{pickText(item.role, locale)}</h3><div className="text-sm text-slate-300 mt-1 font-medium">{item.company}</div><div className="text-xs text-slate-500 mt-1">{pickText(item.environment, locale)}</div></div><div className="flex flex-wrap gap-2 xl:max-w-[52%]">{item.highlights.map(h => <span className="badge" key={pickText(h, locale)}><CheckCircle2 size={11}/>{pickText(h, locale)}</span>)}</div></div><p className="text-slate-400 leading-7 mt-5 max-w-4xl">{pickText(item.summary, locale)}</p></div></article>)}</div></div></section>;
+}
