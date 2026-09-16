@@ -6,6 +6,8 @@ import { localeLabels, localeShort, type Locale } from '../../locales/types';
 
 type Props = { onOpenPalette?: () => void };
 
+type NavItem = [string, string];
+
 export default function Header({ onOpenPalette }: Props) {
   const { locale, setLocale, t } = useI18n();
   const [open, setOpen] = useState(false);
@@ -15,7 +17,7 @@ export default function Header({ onOpenPalette }: Props) {
   const location = useLocation();
   const languageRef = useRef<HTMLDivElement | null>(null);
 
-  const nav = [
+  const nav: NavItem[] = [
     [t('nav.home'), '/#inicio'],
     [t('nav.about'), '/#sobre'],
     [t('nav.stack'), '/#stack'],
@@ -61,6 +63,16 @@ export default function Header({ onOpenPalette }: Props) {
     setLanguageOpen(false);
   };
 
+  const renderNavItem = ([label, href]: NavItem, mobile = false) => {
+    const className = mobile ? 'mobile-nav-item' : 'header-nav-link';
+
+    if (href.startsWith('/#')) {
+      return <a key={href} href={href} className={className} onClick={mobile ? () => setOpen(false) : undefined}>{label}</a>;
+    }
+
+    return <Link key={href} to={href} className={className} onClick={mobile ? () => setOpen(false) : undefined}>{label}</Link>;
+  };
+
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? 'header-scrolled' : 'bg-transparent'}`}>
       <a className="skip-link" href="#main">{t('a11y.skip')}</a>
@@ -73,9 +85,7 @@ export default function Header({ onOpenPalette }: Props) {
         </Link>
 
         <nav className="hidden xl:flex items-center" aria-label="Primary navigation">
-          {nav.map(([label, href]) => (
-            <a key={href} href={href} className="header-nav-link">{label}</a>
-          ))}
+          {nav.map((item) => renderNavItem(item))}
         </nav>
 
         <div className="header-actions">
@@ -124,9 +134,7 @@ export default function Header({ onOpenPalette }: Props) {
       {open && (
         <div className="xl:hidden mobile-nav-shell">
           <div className="container-shell py-3 grid grid-cols-2 gap-2">
-            {nav.map(([label, href]) => (
-              <a key={href} href={href} className="mobile-nav-item" onClick={() => setOpen(false)}>{label}</a>
-            ))}
+            {nav.map((item) => renderNavItem(item, true))}
             <button onClick={() => { setOpen(false); onOpenPalette?.(); }} className="mobile-nav-item text-cyan-200">
               <Command size={16} /> {t('nav.commands')}
             </button>
