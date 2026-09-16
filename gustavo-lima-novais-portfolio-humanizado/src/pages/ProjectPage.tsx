@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ArrowLeft, CheckCircle2, LockKeyhole, ShieldCheck, Wrench } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ShieldCheck, Wrench } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/layout/Footer';
 import ProjectScreenshot from '../components/projects/ProjectScreenshot';
@@ -111,21 +111,18 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
 
   if (slug === 'admin-center') {
     const copy = locale === 'en-US' ? {
-      note: 'Screens captured in Demo mode using fictitious domain, accounts and operational data.',
       dashboard: 'Operations dashboard with environment status, global search and operational indicators.',
       create: 'Governed user provisioning with validated fields and authorized OU selection.',
       reset: 'Password reset flow with individual lookup, preview and confirmation before execution.',
       unlock: 'Account unlock workflow designed for a controlled, individual operation.',
       audit: 'Audit trail and report area focused on traceability of queries and permitted actions.',
     } : locale === 'es-ES' ? {
-      note: 'Capturas realizadas en modo Demostración con dominio, cuentas y datos operativos ficticios.',
       dashboard: 'Panel operativo con estado del entorno, búsqueda global e indicadores de operación.',
       create: 'Creación gobernada de usuarios con campos validados y selección de OU autorizada.',
       reset: 'Flujo de restablecimiento de contraseña con búsqueda individual, vista previa y confirmación.',
       unlock: 'Flujo de desbloqueo de cuenta diseñado para una operación individual y controlada.',
       audit: 'Trazabilidad de auditoría e informes centrados en el seguimiento de consultas y acciones permitidas.',
     } : {
-      note: 'Capturas realizadas no modo Demonstração, utilizando domínio, contas e dados operacionais fictícios.',
       dashboard: 'Painel operacional com status do ambiente, busca global e indicadores da operação.',
       create: 'Criação governada de usuários com campos validados e seleção de OU autorizada.',
       reset: 'Fluxo de reset de senha com pesquisa individual, prévia e confirmação antes da execução.',
@@ -142,7 +139,7 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
 
     return <div className="space-y-5">
       <div className="panel p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div><div className="mono text-xs text-cyan-300">SDE ADMIN CENTER · v1.6.0</div><p className="text-sm text-slate-400 leading-6 mt-2 max-w-3xl">{copy.note}</p></div>
+        <div className="mono text-xs text-cyan-300">SDE ADMIN CENTER · v1.6.0</div>
         <div className="flex flex-wrap gap-2"><span className="badge">PowerShell 5.1</span><span className="badge">WPF / XAML</span><span className="badge">Active Directory</span></div>
       </div>
       <ProjectScreenshot src="/projects/admin-center/00-dashboard.webp" alt={copy.dashboard} caption={copy.dashboard}/>
@@ -176,6 +173,6 @@ export default function ProjectPage({ onOpenPalette }: Props) {
 
     <section className="section"><div className="container-shell grid lg:grid-cols-2 gap-4"><div className="panel p-6"><Wrench size={20} className="text-cyan-300"/><h2 className="font-semibold mt-5">{t('project.technologies')}</h2><div className="flex flex-wrap gap-2 mt-4">{project.technologies.map(x => <span className="badge" key={x}>{x}</span>)}</div></div><div className="panel p-6"><CheckCircle2 size={20} className="text-emerald-400"/><h2 className="font-semibold mt-5">{t('project.results')}</h2><ul className="mt-4 space-y-3 text-sm text-slate-400">{project.results.map(x => <li key={pickText(x, locale)}>• {pickText(x, locale)}</li>)}</ul></div></div></section>
 
-    <section className="section"><div className="container-shell"><div className="panel p-6 md:p-8 border-cyan-300/10"><div className="flex items-start gap-4"><LockKeyhole className="text-cyan-300 shrink-0"/><div><div className="section-kicker mb-2">{t('project.security')}</div><h2 className="text-xl font-semibold">{t('project.securityTitle')}</h2><p className="text-sm text-slate-500 leading-6 mt-3">{t('project.securityCopy')}</p></div></div></div><div className="panel p-6 mt-5"><ShieldCheck size={20} className="text-cyan-300"/><h2 className="font-semibold mt-4">{t('project.lessons')}</h2><div className="grid md:grid-cols-3 gap-3 mt-4">{project.lessons.map(x => <div className="rounded-xl border border-white/5 p-4 text-sm text-slate-400" key={pickText(x, locale)}>{pickText(x, locale)}</div>)}</div></div></div></section>
+    <section className="section"><div className="container-shell"><div className="panel p-6"><ShieldCheck size={20} className="text-cyan-300"/><h2 className="font-semibold mt-4">{t('project.lessons')}</h2><div className="grid md:grid-cols-3 gap-3 mt-4">{project.lessons.map(x => <div className="rounded-xl border border-white/5 p-4 text-sm text-slate-400" key={pickText(x, locale)}>{pickText(x, locale)}</div>)}</div></div></div></section>
   </main><Footer/></>;
 }
