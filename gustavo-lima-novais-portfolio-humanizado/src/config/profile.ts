@@ -10,6 +10,6 @@ export const profile = {
   location: 'São Paulo, SP — Brasil',
   photo: '/images/gustavo-lima-novais.webp',
   photoFallback: '/images/gustavo-lima-novais.png',
-  resume: '/resume/gustavo-lima-novais.pdf',
+  resume: '/resume/Gustavo_Lima_Novais_Atualizado.pdf',
   resumeAvailable: true,
 } as const;

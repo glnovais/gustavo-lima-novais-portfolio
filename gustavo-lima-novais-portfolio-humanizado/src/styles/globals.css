@@ -818,3 +818,127 @@ html[data-theme="light"] .featured-case-visual-head .mono { color:#176b8b; }
   .header-brand-primary { font-size: .95rem; }
   .header-brand-secondary { font-size: .62rem; letter-spacing: .1em; }
 }
+
+/* Portfolio interaction polish — restrained infrastructure/NOC motion */
+@keyframes ambientDrift {
+  0%,100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(0,-10px,0) scale(1.015); }
+}
+@keyframes nodePulse {
+  0%,100% { opacity:.35; box-shadow:0 0 0 rgba(92,225,230,0); }
+  50% { opacity:1; box-shadow:0 0 18px rgba(92,225,230,.42); }
+}
+@keyframes railSweep {
+  0% { transform:translateX(-130%); opacity:0; }
+  12% { opacity:.65; }
+  58% { opacity:.25; }
+  100% { transform:translateX(450%); opacity:0; }
+}
+@keyframes buttonSweep {
+  0% { transform:translateX(-170%) skewX(-20deg); }
+  100% { transform:translateX(340%) skewX(-20deg); }
+}
+
+.hero-orbit-a { animation: ambientDrift 10s ease-in-out infinite; }
+.hero-orbit-b { animation: ambientDrift 14s ease-in-out infinite reverse; }
+.hero-network-bg i { animation: nodePulse 2.8s ease-in-out infinite; }
+.hero-network-bg i:nth-child(2) { animation-delay:.45s; }
+.hero-network-bg i:nth-child(3) { animation-delay:.9s; }
+.hero-network-bg i:nth-child(4) { animation-delay:1.35s; }
+.hero-network-bg i:nth-child(5) { animation-delay:1.8s; }
+
+.technology-rail { position:relative; overflow:hidden; }
+.technology-rail::after {
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  width:26%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(92,225,230,.07),transparent);
+  animation:railSweep 9s linear infinite;
+}
+
+.btn-primary { position:relative; overflow:hidden; isolation:isolate; }
+.btn-primary::after {
+  content:'';
+  position:absolute;
+  inset:-40% auto -40% -40%;
+  width:30%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+  transform:translateX(-170%) skewX(-20deg);
+}
+.btn-primary:hover::after { animation:buttonSweep .75s ease; }
+
+.panel,
+.project-card,
+.screenshot-frame {
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .28s ease;
+}
+
+.screenshot-frame {
+  overflow:hidden;
+  border:1px solid rgba(92,225,230,.11);
+  box-shadow:0 18px 55px rgba(0,0,0,.18);
+  background:#080f1b;
+}
+.screenshot-image-button { overflow:hidden; min-height:0; }
+.screenshot-image-button img {
+  width:100%;
+  height:auto;
+  max-height:none;
+  display:block;
+  object-fit:contain;
+  image-rendering:auto;
+  backface-visibility:hidden;
+  transform:translateZ(0);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+}
+.screenshot-unavailable { min-height:260px; display:grid; place-items:center; color:#64748b; }
+.screenshot-modal { overflow:hidden; }
+.screenshot-modal-scroll {
+  width:min(96vw,1920px);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:12px;
+  box-shadow:0 30px 100px rgba(0,0,0,.58);
+}
+.screenshot-modal-scroll img {
+  display:block;
+  width:1920px;
+  max-width:none;
+  height:auto;
+  background:#fff;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .panel:hover { transform:translateY(-3px); box-shadow:0 20px 55px rgba(0,0,0,.22), 0 0 0 1px rgba(92,225,230,.035); }
+  .project-card { position:relative; overflow:hidden; }
+  .project-card::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:0;
+    background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%), rgba(40,168,255,.08), transparent 45%);
+    transition:opacity .28s ease;
+  }
+  .project-card:hover::after { opacity:1; }
+  .screenshot-frame:hover { transform:translateY(-4px); border-color:rgba(92,225,230,.24); box-shadow:0 28px 70px rgba(0,0,0,.28); }
+  .screenshot-frame:hover .screenshot-image-button img { transform:scale(1.008); filter:contrast(1.015) saturate(1.02); }
+  .technology-rail-item { transition:background .2s ease,color .2s ease; }
+  .technology-rail-item:hover { background:rgba(92,225,230,.035); color:#bcecff; }
+}
+
+@media (max-width:767px) {
+  .screenshot-modal { padding:10px; }
+  .screenshot-modal-scroll { width:100%; max-height:88vh; }
+  .screenshot-modal-scroll img { width:1200px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbit-a,.hero-orbit-b,.hero-network-bg i,.technology-rail::after { animation:none!important; }
+  .btn-primary::after { display:none; }
+}

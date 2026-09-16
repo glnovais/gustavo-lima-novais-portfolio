@@ -134,12 +134,12 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
     };
 
     const screenshots = [
-      ['/projects/admin-center/00-dashboard.webp', copy.dashboard],
-      ['/projects/admin-center/01-criacao-usuario.webp', copy.create],
-      ['/projects/admin-center/02-reset-senha.webp', copy.reset],
-      ['/projects/admin-center/03-desbloqueio-usuario.webp', copy.unlock],
-      ['/projects/admin-center/04-diagnostico-assistido.webp', copy.diagnostic],
-      ['/projects/admin-center/05-auditoria.webp', copy.audit],
+      ['/projects/admin-center/00-dashboard.png', copy.dashboard],
+      ['/projects/admin-center/01-criacao-usuario.png', copy.create],
+      ['/projects/admin-center/02-reset-senha.png', copy.reset],
+      ['/projects/admin-center/03-desbloqueio-usuario.png', copy.unlock],
+      ['/projects/admin-center/04-diagnostico-assistido.png', copy.diagnostic],
+      ['/projects/admin-center/05-auditoria.png', copy.audit],
     ] as const;
 
     return <div className="space-y-5">
