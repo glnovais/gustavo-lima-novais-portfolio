@@ -80,6 +80,7 @@ const adminCenter: Project = {
 };
 
 const removedProjects = new Set(['monitoring', 'itsm']);
+const projectOrder = ['active-directory', 'admin-center', 'automation', 'gpo', 'governance'] as const;
 
 const indexes: Record<string, string> = {
   'active-directory': '01',
@@ -89,9 +90,19 @@ const indexes: Record<string, string> = {
   governance: '05',
 };
 
-export const projects: Project[] = baseProjects
+const projectBySlug = new Map<string, Project>();
+
+baseProjects
   .filter((project) => !removedProjects.has(project.slug))
-  .map((project) => {
-    const source = project.slug === 'admin-center' ? adminCenter : project;
-    return { ...source, index: indexes[source.slug] ?? source.index };
+  .forEach((project) => {
+    projectBySlug.set(project.slug, project.slug === 'admin-center' ? adminCenter : project);
   });
+
+// O Admin Center já existia como case conceitual no conjunto base. Se isso mudar no futuro,
+// esta garantia mantém o projeto real na posição definida acima.
+projectBySlug.set('admin-center', adminCenter);
+
+export const projects: Project[] = projectOrder
+  .map((slug) => projectBySlug.get(slug))
+  .filter((project): project is Project => Boolean(project))
+  .map((project) => ({ ...project, index: indexes[project.slug] }));
