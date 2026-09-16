@@ -79,17 +79,19 @@ const adminCenter: Project = {
   nextSteps: [],
 };
 
+const removedProjects = new Set(['monitoring', 'itsm']);
+
 const indexes: Record<string, string> = {
   'active-directory': '01',
   'admin-center': '02',
   automation: '03',
   gpo: '04',
-  monitoring: '05',
-  itsm: '06',
-  governance: '07',
+  governance: '05',
 };
 
-export const projects: Project[] = baseProjects.map((project) => {
-  const source = project.slug === 'admin-center' ? adminCenter : project;
-  return { ...source, index: indexes[source.slug] ?? source.index };
-});
+export const projects: Project[] = baseProjects
+  .filter((project) => !removedProjects.has(project.slug))
+  .map((project) => {
+    const source = project.slug === 'admin-center' ? adminCenter : project;
+    return { ...source, index: indexes[source.slug] ?? source.index };
+  });
