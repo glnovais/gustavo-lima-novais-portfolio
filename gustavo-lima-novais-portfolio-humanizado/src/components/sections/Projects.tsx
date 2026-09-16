@@ -1,6 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { projects } from '../../data/projects';
+import { projects } from '../../data/portfolioProjects';
 import { pickText } from '../../i18n/text';
 import { useI18n } from '../../i18n/I18nProvider';
 import type { ProjectStatus } from '../../types';

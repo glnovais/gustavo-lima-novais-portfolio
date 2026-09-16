@@ -2,11 +2,12 @@ import type { ReactNode } from 'react';
 import { ArrowLeft, CheckCircle2, LockKeyhole, ShieldCheck, Wrench } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../components/layout/Footer';
+import ProjectScreenshot from '../components/projects/ProjectScreenshot';
 import Header from '../components/layout/Header';
 import ADArchitecture from '../components/infrastructure/ADArchitecture';
 import MonitoringDashboard from '../components/infrastructure/MonitoringDashboard';
 import NetworkTopology from '../components/infrastructure/NetworkTopology';
-import { projects } from '../data/projects';
+import { projects } from '../data/portfolioProjects';
 import { useI18n } from '../i18n/I18nProvider';
 import { pickText } from '../i18n/text';
 import type { ProjectStatus } from '../types';
@@ -37,7 +38,7 @@ function PrinterPolicyEvolution() {
 }
 
 function ProjectVisual({ slug }: { slug: string }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
 
   if (slug === 'active-directory') {
     return <div className="space-y-5"><ADArchitecture/><PrinterPolicyEvolution/></div>;
@@ -109,20 +110,45 @@ Test-Connection -ComputerName "CLIENT-001" -Count 1`}</code></pre>
   }
 
   if (slug === 'admin-center') {
-    return <div className="panel p-4 md:p-6">
-      <div className="mono text-xs text-cyan-300 mb-4">{t('project.adminCenterLab')}</div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {[
-          ['Active Directory', ['Search User', 'Reset Password', 'Unlock Account', 'Security Groups']],
-          ['Computers', ['Search Endpoint', 'Online Status', 'Logged User', 'Hardware Info']],
-          ['Network', ['Ping', 'DNS', 'Connectivity', 'Remote Tests']],
-          ['Monitoring', ['Devices', 'Services', 'Availability', 'Alerts']],
-        ].map(([group, items]) => <div className="admin-module" key={group as string}>
-          <strong>{group as string}</strong>
-          <div>{(items as string[]).map(item => <span key={item}>{item}</span>)}</div>
-        </div>)}
+    const copy = locale === 'en-US' ? {
+      note: 'Screens captured in Demo mode using fictitious domain, accounts and operational data.',
+      dashboard: 'Operations dashboard with environment status, global search and operational indicators.',
+      create: 'Governed user provisioning with validated fields and authorized OU selection.',
+      reset: 'Password reset flow with individual lookup, preview and confirmation before execution.',
+      unlock: 'Account unlock workflow designed for a controlled, individual operation.',
+      audit: 'Audit trail and report area focused on traceability of queries and permitted actions.',
+    } : locale === 'es-ES' ? {
+      note: 'Capturas realizadas en modo Demostración con dominio, cuentas y datos operativos ficticios.',
+      dashboard: 'Panel operativo con estado del entorno, búsqueda global e indicadores de operación.',
+      create: 'Creación gobernada de usuarios con campos validados y selección de OU autorizada.',
+      reset: 'Flujo de restablecimiento de contraseña con búsqueda individual, vista previa y confirmación.',
+      unlock: 'Flujo de desbloqueo de cuenta diseñado para una operación individual y controlada.',
+      audit: 'Trazabilidad de auditoría e informes centrados en el seguimiento de consultas y acciones permitidas.',
+    } : {
+      note: 'Capturas realizadas no modo Demonstração, utilizando domínio, contas e dados operacionais fictícios.',
+      dashboard: 'Painel operacional com status do ambiente, busca global e indicadores da operação.',
+      create: 'Criação governada de usuários com campos validados e seleção de OU autorizada.',
+      reset: 'Fluxo de reset de senha com pesquisa individual, prévia e confirmação antes da execução.',
+      unlock: 'Fluxo de desbloqueio de conta pensado para uma operação individual e controlada.',
+      audit: 'Trilha de auditoria e relatórios voltados à rastreabilidade de consultas e ações permitidas.',
+    };
+
+    const screenshots = [
+      ['/projects/admin-center/01-criacao-usuario.webp', copy.create],
+      ['/projects/admin-center/02-reset-senha.webp', copy.reset],
+      ['/projects/admin-center/03-desbloqueio-usuario.webp', copy.unlock],
+      ['/projects/admin-center/05-auditoria.webp', copy.audit],
+    ] as const;
+
+    return <div className="space-y-5">
+      <div className="panel p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div><div className="mono text-xs text-cyan-300">SDE ADMIN CENTER · v1.6.0</div><p className="text-sm text-slate-400 leading-6 mt-2 max-w-3xl">{copy.note}</p></div>
+        <div className="flex flex-wrap gap-2"><span className="badge">PowerShell 5.1</span><span className="badge">WPF / XAML</span><span className="badge">Active Directory</span></div>
       </div>
-      <p className="text-xs text-slate-600 mt-5">{t('project.adminCenterNote')}</p>
+      <ProjectScreenshot src="/projects/admin-center/00-dashboard.webp" alt={copy.dashboard} caption={copy.dashboard}/>
+      <div className="grid xl:grid-cols-2 gap-5">
+        {screenshots.map(([src, caption]) => <ProjectScreenshot key={src} src={src} alt={caption} caption={caption}/>)}
+      </div>
     </div>;
   }
 

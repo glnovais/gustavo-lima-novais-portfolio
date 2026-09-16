@@ -9,7 +9,8 @@ type Props = {
 };
 
 export default function ProjectScreenshot({ src, alt, caption }: Props) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
+  const zoomLabel = locale === 'en-US' ? 'Expand' : locale === 'es-ES' ? 'Ampliar' : 'Ampliar';
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function ProjectScreenshot({ src, alt, caption }: Props) {
       <div className="screenshot-toolbar"><i/><i/><i/><span>{t('screenshots.title')}</span></div>
       <button className="screenshot-image-button" onClick={() => setOpen(true)} aria-label={`${t('screenshots.title')}: ${caption}`}>
         <img src={src} alt={alt} loading="lazy" decoding="async"/>
-        <span><Maximize2 size={15}/> Zoom</span>
+        <span><Maximize2 size={15}/> {zoomLabel}</span>
       </button>
       <figcaption>{caption}</figcaption>
     </figure>
