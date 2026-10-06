@@ -1,0 +1,77 @@
+.portfolio-loader {
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(40,168,255,.12),transparent 34%),
+    #070b14;
+  animation:portfolio-loader-in .22s ease both;
+}
+.portfolio-loader::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 38%,rgba(92,225,230,.035) 50%,transparent 62%);
+  transform:translateX(-100%);
+  animation:portfolio-loader-sweep 1.45s ease-in-out infinite;
+}
+.portfolio-loader__grid {
+  position:absolute;
+  inset:0;
+  opacity:.25;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(circle at center,black,transparent 74%);
+}
+.portfolio-loader__content {
+  position:relative;
+  z-index:2;
+  width:min(440px,calc(100% - 40px));
+  padding:30px;
+  border:1px solid rgba(92,225,230,.14);
+  border-radius:20px;
+  background:rgba(8,15,26,.74);
+  box-shadow:0 30px 100px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:blur(18px);
+}
+.portfolio-loader__brand {
+  margin-bottom:24px;
+  color:#7f93aa;
+  font-size:.68rem;
+  letter-spacing:.18em;
+}
+.portfolio-loader__rail {
+  height:1px;
+  margin-top:24px;
+  overflow:hidden;
+  background:rgba(255,255,255,.055);
+}
+.portfolio-loader__rail span {
+  display:block;
+  width:44%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,#28a8ff,#5ce1e6,transparent);
+  animation:portfolio-loader-rail 1.1s ease-in-out infinite;
+}
+.portfolio-loader__meta {
+  margin-top:14px;
+  color:#43556a;
+  font-size:.58rem;
+  letter-spacing:.11em;
+}
+@keyframes portfolio-loader-in { from{opacity:0} to{opacity:1} }
+@keyframes portfolio-loader-sweep { 0%{transform:translateX(-100%)} 70%,100%{transform:translateX(100%)} }
+@keyframes portfolio-loader-rail { from{transform:translateX(-120%)} to{transform:translateX(340%)} }
+@media (max-width:520px) {
+  .portfolio-loader__content { padding:24px 20px; border-radius:16px; }
+  .portfolio-loader__meta { font-size:.52rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .portfolio-loader::after,.portfolio-loader__rail span { animation:none; }
+}
