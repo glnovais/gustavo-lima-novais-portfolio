@@ -12,6 +12,9 @@ import {
 } from 'lucide-react';
 import { profile } from '../../config/profile';
 import { useI18n } from '../../i18n/I18nProvider';
+import Ferrofluid from '../effects/Ferrofluid';
+
+const FERRO_COLORS = ['#28A8FF', '#5CE1E6', '#34D399'];
 
 export default function Hero() {
   const { t } = useI18n();
@@ -38,6 +41,27 @@ export default function Hero() {
       <div className="hero-orbit hero-orbit-b" />
       <div className="hero-network-bg" aria-hidden="true">
         <i /><i /><i /><i /><i />
+      </div>
+      <div className="hero-ferrofluid" aria-hidden="true">
+        <Ferrofluid
+          colors={FERRO_COLORS}
+          speed={0.24}
+          scale={1.45}
+          turbulence={0.72}
+          fluidity={0.12}
+          rimWidth={0.17}
+          sharpness={3.2}
+          shimmer={0.72}
+          glow={1.45}
+          flowDirection="right"
+          opacity={0.52}
+          mouseInteraction
+          mouseStrength={0.5}
+          mouseRadius={0.26}
+          mouseDampening={0.2}
+          dpr={1.15}
+          mixBlendMode="screen"
+        />
       </div>
 
       <div className="container-shell hero-grid">
