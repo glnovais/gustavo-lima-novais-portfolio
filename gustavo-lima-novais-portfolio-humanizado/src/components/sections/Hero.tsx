@@ -45,24 +45,26 @@ export default function Hero() {
       <div className="hero-ferrofluid" aria-hidden="true">
         <Ferrofluid
           colors={FERRO_COLORS}
-          speed={0.24}
-          scale={1.45}
-          turbulence={0.72}
-          fluidity={0.12}
-          rimWidth={0.17}
-          sharpness={3.2}
-          shimmer={0.72}
-          glow={1.45}
+          speed={0.32}
+          scale={1.28}
+          turbulence={0.92}
+          fluidity={0.16}
+          rimWidth={0.21}
+          sharpness={2.85}
+          shimmer={0.9}
+          glow={1.85}
           flowDirection="right"
-          opacity={0.52}
+          opacity={0.72}
           mouseInteraction
-          mouseStrength={0.5}
-          mouseRadius={0.26}
-          mouseDampening={0.2}
+          mouseStrength={0.78}
+          mouseRadius={0.34}
+          mouseDampening={0.13}
           dpr={1.15}
           mixBlendMode="screen"
         />
       </div>
+
+      <div className="hero-signal-line" aria-hidden="true"><i /><i /><i /></div>
 
       <div className="container-shell hero-grid">
         <div className="reveal min-w-0 hero-content">
@@ -107,6 +109,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual reveal">
+          <div className="hero-visual-aura" aria-hidden="true" />
           <div className="portrait-grid" aria-hidden="true" />
           <div className="portrait-frame">
             <div className="portrait-corner portrait-corner-a" />
