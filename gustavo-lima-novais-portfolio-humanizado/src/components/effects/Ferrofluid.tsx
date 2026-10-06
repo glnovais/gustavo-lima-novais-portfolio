@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type CSSProperties } from 'react';
 import { Mesh, Program, Renderer, Triangle } from 'ogl';
 import './Ferrofluid.css';
 
@@ -23,7 +23,7 @@ type Props = {
   mouseStrength?: number;
   mouseRadius?: number;
   mouseDampening?: number;
-  mixBlendMode?: string;
+  mixBlendMode?: CSSProperties['mixBlendMode'];
 };
 
 const MAX_COLORS = 8;
