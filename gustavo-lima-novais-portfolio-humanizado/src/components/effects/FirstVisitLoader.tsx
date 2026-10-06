@@ -10,6 +10,7 @@ export default function FirstVisitLoader() {
   const [visible, setVisible] = useState(false);
   const [status, setStatus] = useState<'working' | 'done'>('working');
   const [step, setStep] = useState(0);
+  const [exiting, setExiting] = useState(false);
 
   const copy = locale === 'en-US'
     ? {
@@ -33,11 +34,12 @@ export default function FirstVisitLoader() {
     const timers = [
       window.setTimeout(() => setStep(1), 360),
       window.setTimeout(() => setStep(2), 760),
-      window.setTimeout(() => setStatus('done'), 1120),
+      window.setTimeout(() => setStatus('done'), 1180),
+      window.setTimeout(() => setExiting(true), 1540),
       window.setTimeout(() => {
         window.sessionStorage.setItem(SESSION_KEY, '1');
         setVisible(false);
-      }, 1560),
+      }, 1920),
     ];
 
     return () => timers.forEach(window.clearTimeout);
@@ -46,7 +48,7 @@ export default function FirstVisitLoader() {
   if (!visible) return null;
 
   return (
-    <div className="portfolio-loader" aria-live="polite">
+    <div className={`portfolio-loader${exiting ? " portfolio-loader--exit" : ""}`} aria-live="polite">
       <div className="portfolio-loader__grid" aria-hidden="true" />
       <div className="portfolio-loader__content">
         <div className="portfolio-loader__brand mono">GN://INFRA</div>
