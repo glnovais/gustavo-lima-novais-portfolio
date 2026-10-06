@@ -7,6 +7,7 @@ import LabPage from './pages/LabPage';
 import NotFoundPage from './pages/NotFoundPage';
 import CommandPalette from './components/ui/CommandPalette';
 import ScrollProgress from './components/ui/ScrollProgress';
+import FirstVisitLoader from './components/effects/FirstVisitLoader';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,6 +36,7 @@ export default function App() {
 
   return (
     <>
+      <FirstVisitLoader />
       <ScrollToTop />
       <ScrollProgress />
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
