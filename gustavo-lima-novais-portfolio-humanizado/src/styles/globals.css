@@ -942,3 +942,121 @@ html[data-theme="light"] .featured-case-visual-head .mono { color:#176b8b; }
   .hero-orbit-a,.hero-orbit-b,.hero-network-bg i,.technology-rail::after { animation:none!important; }
   .btn-primary::after { display:none; }
 }
+
+
+/* React Bits effects */
+.hero-section { isolation:isolate; }
+.hero-grid,
+.hero-technology-wrap { position:relative; z-index:2; }
+
+.hero-ferrofluid {
+  position:absolute;
+  z-index:0;
+  top:7%;
+  right:-5%;
+  width:min(62vw,940px);
+  height:78%;
+  opacity:.38;
+  pointer-events:auto;
+  filter:blur(.15px);
+  mask-image:radial-gradient(ellipse at 62% 48%,black 0%,rgba(0,0,0,.95) 38%,transparent 76%);
+  -webkit-mask-image:radial-gradient(ellipse at 62% 48%,black 0%,rgba(0,0,0,.95) 38%,transparent 76%);
+}
+
+.hero-ferrofluid::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,var(--bg) 0%,transparent 31%,transparent 74%,var(--bg) 100%);
+}
+
+.project-card,
+.panel,
+.featured-case-shell,
+.contact-panel {
+  transition:
+    transform .28s cubic-bezier(.2,.75,.2,1),
+    border-color .28s ease,
+    box-shadow .28s ease,
+    background .28s ease;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .project-card:hover {
+    transform:translateY(-4px);
+    box-shadow:0 24px 60px rgba(0,0,0,.28),0 0 0 1px rgba(92,225,230,.04);
+  }
+
+  .panel:hover {
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 18px 46px rgba(0,0,0,.13);
+  }
+
+  .btn-primary {
+    position:relative;
+    overflow:hidden;
+  }
+
+  .btn-primary::after {
+    content:'';
+    position:absolute;
+    inset:-1px;
+    background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.36) 50%,transparent 68%);
+    transform:translateX(-125%);
+    transition:transform .55s ease;
+  }
+
+  .btn-primary:hover::after { transform:translateX(125%); }
+}
+
+.technology-rail { position:relative; overflow:hidden; }
+.technology-rail::after {
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:18%;
+  left:-22%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(92,225,230,.055),transparent);
+  animation:technology-sweep 8s ease-in-out infinite;
+}
+
+@keyframes technology-sweep {
+  0%,16% { transform:translateX(0); opacity:0; }
+  26% { opacity:1; }
+  72% { opacity:.75; }
+  84%,100% { transform:translateX(720%); opacity:0; }
+}
+
+html[data-theme="light"] .hero-ferrofluid { opacity:.15; mix-blend-mode:multiply; }
+
+@media (max-width:1024px) {
+  .hero-ferrofluid {
+    top:18%;
+    right:-22%;
+    width:78vw;
+    height:62%;
+    opacity:.24;
+    pointer-events:none;
+  }
+}
+
+@media (max-width:767px) {
+  .hero-ferrofluid {
+    top:34%;
+    right:-42%;
+    width:120vw;
+    height:48%;
+    opacity:.16;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .hero-ferrofluid { display:none; }
+  .technology-rail::after { animation:none; display:none; }
+  .project-card,
+  .panel,
+  .featured-case-shell,
+  .contact-panel { transition:none; }
+}
